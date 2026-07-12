@@ -17,11 +17,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   background: var(--roas-black);
+  overflow-x: hidden;
 }
 
 a {
@@ -1198,13 +1200,22 @@ a {
     width: min(100% - 28px, 1120px);
   }
 
+  .site-shell {
+    max-width: 100vw;
+  }
+
   .topbar {
     position: absolute;
     top: 10px;
     width: calc(100% - 20px);
+    max-width: calc(100vw - 20px);
     min-height: auto;
     flex-wrap: wrap;
     padding: 10px;
+  }
+
+  .brand {
+    min-width: 0;
   }
 
   .nav-links {
@@ -1220,8 +1231,10 @@ a {
   }
 
   .topbar-cta {
+    max-width: 42%;
     padding: 0 12px;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
   }
 
   .hero-section {
@@ -1237,12 +1250,21 @@ a {
     padding-top: 180px;
   }
 
+  .hero-copy {
+    min-width: 0;
+  }
+
   .hero-copy h1 {
-    font-size: clamp(3.1rem, 16vw, 4.8rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(2.72rem, 13.2vw, 4rem);
+    line-height: 1;
   }
 
   .hero-text {
+    max-width: 100%;
     font-size: 1rem;
+    overflow-wrap: anywhere;
   }
 
   .hero-actions {
@@ -1253,6 +1275,7 @@ a {
     width: 100%;
     box-sizing: border-box;
     text-align: center;
+    white-space: normal;
   }
 
   .funnel-orbit {
