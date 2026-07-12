@@ -72,12 +72,82 @@ const footerColumns = [
   ['Contato', [['WhatsApp', 'https://wa.me/5500000000000'], ['contato@roas.com.br', 'mailto:contato@roas.com.br'], ['Sao Paulo - SP', '#contato']]],
 ]
 
+const linkTreeItems = [
+  {
+    label: 'WhatsApp',
+    text: 'Fale direto com a ROAS',
+    href: 'https://wa.me/5500000000000',
+    icon: '/assets/roas/linktree/icon-whatsapp.png',
+  },
+  {
+    label: 'LinkedIn',
+    text: 'Conecte-se com a marca',
+    href: 'https://www.linkedin.com/company/codexa-web',
+    icon: '/assets/roas/linktree/icon-linkedin.png',
+  },
+  {
+    label: 'Instagram',
+    text: 'Veja conteudos e bastidores',
+    href: 'https://www.instagram.com/',
+    icon: '/assets/roas/linktree/icon-instagram.png',
+  },
+  {
+    label: 'Perfil de Fotografo',
+    text: 'Conheca o portfolio visual',
+    href: '#perfil-fotografo',
+    icon: '/assets/roas/linktree/icon-photographer.png',
+  },
+]
+
 function ServiceIcon({ src, title }) {
   return (
     <span className="service-icon" aria-hidden="true">
       <img src={src} alt="" width="78" height="78" loading="lazy" />
       <span className="sr-only">{title}</span>
     </span>
+  )
+}
+
+function LinkTreePage() {
+  return (
+    <main className="linktree-shell">
+      <section className="linktree-stage" aria-label="Links ROAS">
+        <div className="linktree-visual" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="linktree-profile">
+          <div className="linktree-avatar" aria-hidden="true">
+            <img src="/assets/roas/linktree/roas-profile-circle.png" alt="" width="150" height="150" />
+          </div>
+          <p className="eyebrow">Links oficiais</p>
+          <h1>Todos os links da ROAS em um so lugar.</h1>
+          <p>Fale com a equipe, acompanhe os conteudos e conheca o perfil fotografico da marca.</p>
+        </div>
+
+        <nav className="linktree-list" aria-label="Links principais da ROAS">
+          {linkTreeItems.map((item) => (
+            <a className="linktree-item" href={item.href} target={item.href.startsWith('#') ? undefined : '_blank'} rel={item.href.startsWith('#') ? undefined : 'noreferrer'} key={item.label}>
+              <span className="linktree-icon" aria-hidden="true">
+                <img src={item.icon} alt="" width="48" height="48" loading="lazy" />
+              </span>
+              <span>
+                <strong>{item.label}</strong>
+                <small>{item.text}</small>
+              </span>
+              <b aria-hidden="true">→</b>
+            </a>
+          ))}
+        </nav>
+
+        <footer className="linktree-footer">
+          <span>Agencia ROAS</span>
+          <span>Marketing digital e performance</span>
+        </footer>
+      </section>
+    </main>
   )
 }
 
@@ -121,6 +191,11 @@ function App() {
   }, [])
 
   const closeMenu = () => setIsMenuOpen(false)
+  const isLinkTreePage = window.location.pathname.replace(/\/$/, '') === '/links'
+
+  if (isLinkTreePage) {
+    return <LinkTreePage />
+  }
 
   return (
     <main className="site-shell">
