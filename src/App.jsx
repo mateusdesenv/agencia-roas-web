@@ -249,6 +249,8 @@ function App() {
 
       <section className="hero-section" id="hero">
         <div className="hero-bg" aria-hidden="true">
+          <div className="funnel-glow" />
+          <div className="funnel-orbit" />
           {heroCards.map(([label, value, note, className]) => (
             <div className={`floating-card ${className}`} key={label}>
               <span>{label}</span>

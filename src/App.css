@@ -603,19 +603,68 @@ a {
   pointer-events: none;
 }
 
+.funnel-glow,
 .funnel-orbit {
   position: absolute;
-  top: 22%;
-  right: 8%;
-  width: min(460px, 42vw);
+  top: 50%;
+  left: 50%;
+  width: min(520px, 44vw);
   aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  translate: -50% -50%;
+}
+
+.funnel-glow {
+  z-index: 0;
   background:
-    conic-gradient(from 210deg, transparent, rgba(255, 47, 174, 0.24), rgba(139, 44, 255, 0.42), transparent 70%),
-    radial-gradient(circle, rgba(255, 106, 42, 0.22), transparent 56%);
-  filter: drop-shadow(0 0 70px rgba(139, 44, 255, 0.34));
-  animation: slow-spin 22s linear infinite;
+    conic-gradient(from 0deg, rgba(255, 106, 42, 0.96), rgba(255, 47, 174, 0.96), rgba(139, 44, 255, 0.92), rgba(255, 106, 42, 0.96));
+  filter: blur(42px) saturate(1.25);
+  opacity: 0.68;
+  transform-origin: 50% 50%;
+  animation:
+    funnel-glow-rotate 32s linear infinite,
+    funnel-glow-pulse 5.8s ease-in-out infinite;
+}
+
+.funnel-orbit {
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.36), transparent 18%),
+    radial-gradient(circle at 52% 55%, rgba(255, 255, 255, 0.12), transparent 40%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.06) 44%, rgba(8, 11, 22, 0.42)),
+    rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -34px 74px rgba(8, 11, 22, 0.34),
+    0 0 42px rgba(255, 47, 174, 0.24),
+    0 0 86px rgba(139, 44, 255, 0.2);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+}
+
+.funnel-orbit::before,
+.funnel-orbit::after {
+  position: absolute;
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.funnel-orbit::before {
+  inset: 7%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    conic-gradient(from 180deg, transparent 0 22%, rgba(255, 255, 255, 0.22), transparent 50% 100%);
+  mask: radial-gradient(circle, transparent 56%, #000 57% 59%, transparent 60%);
+}
+
+.funnel-orbit::after {
+  inset: 19%;
+  background:
+    linear-gradient(90deg, transparent 48%, rgba(255, 255, 255, 0.18) 49% 51%, transparent 52%),
+    linear-gradient(0deg, transparent 48%, rgba(255, 255, 255, 0.12) 49% 51%, transparent 52%);
+  opacity: 0.72;
 }
 
 .floating-card {
@@ -1091,6 +1140,24 @@ a {
 @keyframes slow-spin {
   to {
     transform: rotate(1turn);
+  }
+}
+
+@keyframes funnel-glow-rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes funnel-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.52;
+    scale: 0.95;
+  }
+  50% {
+    opacity: 0.8;
+    scale: 1.04;
   }
 }
 
@@ -2154,10 +2221,17 @@ a {
   }
 
   .funnel-orbit {
-    top: 47%;
-    right: -18%;
+    top: 52%;
+    left: 50%;
     width: 78vw;
     opacity: 0.55;
+  }
+
+  .funnel-glow {
+    top: 52%;
+    left: 50%;
+    width: 82vw;
+    opacity: 0.42;
   }
 
   .floating-card {
