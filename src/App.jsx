@@ -74,6 +74,12 @@ const footerColumns = [
 
 const linkTreeItems = [
   {
+    label: 'Site Oficial',
+    text: 'Conheca o site da ROAS',
+    href: 'https://agencia-roas-web.vercel.app/',
+    icon: '/assets/roas/linktree/icon-site.png',
+  },
+  {
     label: 'WhatsApp',
     text: 'Fale direto com a ROAS',
     href: 'https://wa.me/5500000000000',
